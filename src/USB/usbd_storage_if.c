@@ -309,7 +309,7 @@ int8_t STORAGE_Write_FS (uint8_t lun,
 				FLASH_WaitForLastOperation(WAIT_TIMEOUT);
 				//break;
 
-				if (addr >= (blk_addr*STORAGE_BLK_SIZ + (blk_len*STORAGE_BLK_SIZ)))
+				if (addr <= (blk_addr*STORAGE_BLK_SIZ + (blk_len*STORAGE_BLK_SIZ)))
 				{
 					addr=0;
 					sector_num=1;
