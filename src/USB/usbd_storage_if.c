@@ -227,7 +227,7 @@ int8_t STORAGE_Read_FS (uint8_t lun,
         case 0:
             for(i=0; i < (blk_len*STORAGE_BLK_SIZ); i+=1)
             {
-                buf[i] = *((uint32_t*)(FLASH_USER_START_ADDR + (blk_addr*STORAGE_BLK_SIZ)+ i));
+                buf[i] = *((uint8_t*)(FLASH_USER_START_ADDR + (blk_addr*STORAGE_BLK_SIZ)+ i));
             }
             break;
         case 1:
@@ -309,7 +309,7 @@ int8_t STORAGE_Write_FS (uint8_t lun,
 				FLASH_WaitForLastOperation(WAIT_TIMEOUT);
 				//break;
 
-				if (addr <= (blk_addr*STORAGE_BLK_SIZ + (blk_len*STORAGE_BLK_SIZ)))
+				if ((addr>=PAGE_SIZE)||(j<(blk_len*STORAGE_BLK_SIZ))) //(addr < (blk_addr*STORAGE_BLK_SIZ + (blk_len*STORAGE_BLK_SIZ)))
 				{
 					addr=0;
 					sector_num=1;
